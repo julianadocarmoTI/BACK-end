@@ -113,3 +113,82 @@ SELECT * FROM sakila.language LIMIT 5 OFFSET 1;
 SELECT title, release_year, length, replacement_cost, rating FROM sakila.film
 ORDER BY length DESC, replacement_cost ASC
 LIMIT 20;
+
+
+/ ********** - Soluções Encontrando dados em um banco de dados - USE Scientists ********** /
+/ * 1 -  Escreva uma query para exibir a string "This is SQL Exercise, Practice and Solution". */
+USE Scientists;
+SELECT 'This is SQL Exercise, Practice and Solution';
+
+/ * 2 -  Escreva uma query para exibir três números em três colunas.  * /
+SELECT 1, 2, 3;
+
+/ * 3 -  Escreva uma query para exibir a soma dos números 10 e 15. * /
+SELECT 10 + 15;
+
+/ * 4 -  Escreva uma query para exibir o resultado de uma expressão aritmética qualquer. * /
+SELECT (3 * 4) + 12;
+
+/ * 5 -  Escreva uma query para exibir todas as informações de todos os cientistas * /
+SELECT * FROM Scientists;
+
+/ * 6 -  Escreva uma query para exibir o nome como "Nome do Projeto" e as horas como "Tempo de Trabalho" de cada projeto * /
+SELECT Name AS 'Nome do Projeto', Hours AS 'Tempo de Trabalho' FROM Projects;
+
+/ * 7 -  Escreva uma query para exibir o nome dos cientistas em ordem alfabética. * /
+SELECT Name FROM Scientists
+ORDER BY Name ASC;
+
+/ * 8 -  Escreva uma query para exibir o nome dos Projetos em ordem alfabética descendente.  * /
+SELECT Name FROM Projects
+ORDER BY Name DESC;
+
+/ * 9 -  Escreva uma query que exiba a string "O projeto Name precisou de Hours horas para ser concluído." para cada projeto. * /
+SELECT CONCAT('O projeto ', Name, ' precisou de ', Hours, ' horas para ser concluído.') as resultado FROM Projects;
+
+/ * 10 -  Escreva uma query para exibir o nome e as horas dos três projetos com a maior quantidade de horas. * /
+SELECT Name, Hours FROM Projects
+ORDER BY Hours DESC LIMIT 3;
+
+/ * 11 -  Escreva uma query para exibir o código de todos os projetos da tabela AssignedTo sem que haja repetições. * /
+SELECT DISTINCT Project FROM AssignedTo;
+
+/ * 12 -  Escreva uma query para exibir o nome do projeto com maior quantidade de horas. * /
+SELECT Name FROM Projects
+ORDER BY Hours DESC
+LIMIT 1;
+
+/ * 13 -  Escreva uma query para exibir o nome do segundo projeto com menor quantidade de horas. * /
+SELECT Name FROM Projects
+ORDER BY Hours ASC
+LIMIT 1
+OFFSET 1;
+
+/ * 14 -  Escreva uma query para exibir todas as informações dos cinco projetos com a menor quantidade de horas. * /
+SELECT * FROM Projects
+ORDER BY Hours ASC LIMIT 5;
+
+/ * 15 -  Escreva uma query que exiba a string "Existem Number cientistas na tabela Scientists.", em que Number se refira a quantidade de cientistas. * /
+SELECT CONCAT('Existem ', COUNT(Name), ' cientistas na tabela Scientists.') as resultado FROM Scientists;
+
+
+/ ********** - Bônus - USE PiecesProviders ********** /
+/ * 1 -  Escreva uma query para ordenar o nome das empresas de forma alfabética descendente e que retorne somente o código e o nome da primeira empresa. */
+USE PiecesProviders;
+
+SELECT Code, Name FROM Providers
+ORDER BY Name DESC
+LIMIT 1;
+
+/ * 2 -  Escreve uma query para exibir todas as informações das cinco peças com os maiores preços. */
+SELECT Piece, Price FROM Provides
+ORDER BY Price DESC LIMIT 5;
+
+/ * 3 -  Escreva uma query para exibir o nome das empresas e preço das peças, começando a lista a partir do 3º item, e exibindo o preço das quatro peças mais caras. */
+SELECT DISTINCT Provider, Price FROM Provides
+ORDER BY Price DESC LIMIT 4 OFFSET 3;
+
+/ * 4 -  Escreva uma query para exibir a string "A peça mais cara é a: Piece , provida pela empresa Provider e custa Price reais.", essa query deve retornar somene uma única string, sendo que Price se refere ao maior preço. */
+SELECT CONCAT('A peça mais cara é a: ', Piece, ', provida pela empresa ', Provider, ' e custa ', Price, ' reais.') as resultado FROM Provides
+ORDER BY Price DESC
+LIMIT 1;
